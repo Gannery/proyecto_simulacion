@@ -1,4 +1,4 @@
-### Proyecto Final U2 Simulación ###
+# Proyecto Final U2 Simulación 
 
 Un menú (consola o GUI) de generadores de números aleatorios
 
