@@ -87,7 +87,7 @@ class MenuPrincipal:
         show_generator_table(
             numeros=self.numeros_generados,
             metodo="Multiplicador Constante",
-            semilla=f"{semilla_1}, {semilla_2}",
+            semilla= f"{semilla_1}, {semilla_2}",
             parametros={"Cantidad": cantidad}
         )
         
@@ -126,7 +126,7 @@ class MenuPrincipal:
                 print("No hay números generados. Se usarán números aleatorios.")
             
             print("\n-- UNIFORMIDAD --")
-            print("1. Prueba Chi-Cuadrada (χ²)")
+            print("1. Prueba Chi-Cuadrada (x²)")
             print("2. Prueba Kolmogorov-Smirnov (KS)")
             print("\n-- ALEATORIEDAD --")
             print("3. Prueba de corridas arriba y abajo")

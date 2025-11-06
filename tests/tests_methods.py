@@ -6,6 +6,7 @@ from scipy import stats
 from collections import Counter
 
 class TestMethods():
+
     
     def up_down_method(self, numeros=None, n=20, alpha=0.05, seed=None) -> dict:
         """
@@ -364,16 +365,15 @@ class TestMethods():
         # Agrupar huecos grandes en una categoría "≥4"
         categorias_num = list(range(min(4, max_hueco + 1)))
         if max_hueco >= 4:
-            categorias_num.append(4)  # Usamos 4 para los cálculos de ≥4
+            categorias_num.append(4)  # 4 para los cálculos de ≥4
         
-        # Lista de etiquetas para mostrar
         categorias_str = [str(i) for i in categorias_num]
         if max_hueco >= 4:
             categorias_str[-1] = "≥4"
         
         fo = []
         fe = []
-        for i, (cat_num, cat_str) in enumerate(zip(categorias_num, categorias_str)):
+        for (cat_num, cat_str) in enumerate(zip(categorias_num, categorias_str)):
             if cat_str == "≥4":
                 fo_val = sum(count for gap, count in contador_huecos.items() if gap >= 4)
                 fe_val = len(huecos) * ((1 - p) ** 4)
@@ -384,11 +384,7 @@ class TestMethods():
             fo.append(fo_val)
             fe.append(fe_val)
         
-        chi_cuadrado = sum(((o - e) ** 2) / e if e > 0 else 0 for o, e in zip(fo, fe))
-        grados_libertad = len(categorias_num) - 1
-        chi_critico = stats.chi2.ppf(1 - alpha, grados_libertad)
-        
-        aceptado = chi_cuadrado < chi_critico
+        chi_cuadrado, chi_critico, grados_libertad, aceptado = self._compute_chi_square(fo, fe, alpha)
         conclusion = "Los números son independientes" if aceptado else "Los números no son independientes"
         
         tabla = pd.DataFrame({
@@ -414,3 +410,22 @@ class TestMethods():
             'conclusion': conclusion,
             'tabla_huecos': tabla
         }
+    
+    def _compute_chi_square(self, fo, fe, alpha=0.05):
+        """
+        Calcula el estadístico chi-cuadrado, grados de libertad y el valor crítico.
+
+        Args:
+            fo: lista/array de frecuencias observadas
+            fe: lista/array de frecuencias esperadas
+            alpha: nivel de significancia
+
+        Returns:
+            tuple: (chi_cuadrado, chi_critico, grados_libertad, aceptado)
+        """
+        # Asegurar listas numéricas
+        chi_cuadrado = sum(((o - e) ** 2) / e if e > 0 else 0 for o, e in zip(fo, fe))
+        grados_libertad = len(fo) - 1
+        chi_critico = stats.chi2.ppf(1 - alpha, grados_libertad)
+        aceptado = chi_cuadrado < chi_critico
+        return chi_cuadrado, chi_critico, grados_libertad, aceptado

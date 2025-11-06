@@ -84,7 +84,11 @@ def get_n() -> int:
         except ValueError:
             print("Error: Entrada inválida. Por favor ingrese un número entero válido.")
 
-def show_generator_table(numeros: List[float], metodo: str, semilla: int, parametros: dict):
+def show_generator_table(
+        numeros: List[float], 
+        metodo: str, 
+        semilla: Union[int, str, Tuple[int, int]], 
+        parametros: dict):
     """
     Muestra los resultados de un generador en formato tabla
     
@@ -152,10 +156,7 @@ def show_test_results(resultados: dict, nombre_prueba: str):
         mostrar_corridas(resultados)
     elif nombre_prueba == "Huecos":
         mostrar_huecos(resultados)
-    elif nombre_prueba == "Póker":
-        mostrar_poker(resultados)
     
-    # Conclusión
     print("\n" + "=" * 80)
     print("Conclusión:")
     print("=" * 80)
@@ -174,7 +175,7 @@ def mostrar_chi_cuadrada(resultados: dict):
     """Muestra resultados específicos de Chi-Cuadrada"""
     print(f"\nEstadísticos:")
     stats = [
-        ["Chi-cuadrado calculado (χ²)", f"{resultados.get('chi_cuadrado', 0):.6f}"],
+        ["Chi-cuadrado calculado (x²)", f"{resultados.get('chi_cuadrado', 0):.6f}"],
         ["Chi-cuadrado crítico", f"{resultados.get('chi_critico', 0):.6f}"],
         ["Grados de libertad", resultados.get('grados_libertad', 'N/A')],
     ]
@@ -204,8 +205,8 @@ def mostrar_corridas(resultados: dict):
     print(f"\nEstadísticos:")
     stats = [
         ["Corridas observadas (Co)", resultados.get('Co', 'N/A')],
-        ["Corridas esperadas (μ_Co)", f"{resultados.get('mu_Co', 0):.4f}"],
-        ["Desviación estándar (σ_Co)", f"{resultados.get('sigma_Co', 0):.4f}"],
+        ["Corridas esperadas", f"{resultados.get('mu_Co', 0):.4f}"],
+        ["Desviación estándar", f"{resultados.get('sigma_Co', 0):.4f}"],
         ["Estadístico Z₀", f"{resultados.get('Z0', 0):.4f}"],
         ["Valor crítico Z", f"{resultados.get('Z_critico', 0):.4f}"],
     ]
@@ -227,7 +228,7 @@ def mostrar_huecos(resultados: dict):
     """Muestra resultados específicos de prueba de huecos"""
     print(f"\nEstadísticos:")
     stats = [
-        ["Chi-cuadrado calculado (χ²)", f"{resultados.get('chi_cuadrado', 0):.6f}"],
+        ["Chi-cuadrado calculado (x²)", f"{resultados.get('chi_cuadrado', 0):.6f}"],
         ["Chi-cuadrado crítico", f"{resultados.get('chi_critico', 0):.6f}"],
         ["Grados de libertad", resultados.get('grados_libertad', 'N/A')],
         ["Total de huecos", resultados.get('total_huecos', 'N/A')],
@@ -237,17 +238,3 @@ def mostrar_huecos(resultados: dict):
     if 'tabla_huecos' in resultados:
         print("\nDistribución de Huecos:")
         print(tabulate(resultados['tabla_huecos'], headers='keys', tablefmt='fancy_grid', showindex=False))
-
-def mostrar_poker(resultados: dict):
-    """Muestra resultados específicos de prueba de póker"""
-    print(f"\nEstadísticos:")
-    stats = [
-        ["Chi-cuadrado calculado (χ²)", f"{resultados.get('chi_cuadrado', 0):.6f}"],
-        ["Chi-cuadrado crítico", f"{resultados.get('chi_critico', 0):.6f}"],
-        ["Grados de libertad", resultados.get('grados_libertad', 'N/A')],
-    ]
-    print(tabulate(stats, tablefmt="fancy_grid"))
-    
-    if 'tabla_manos' in resultados:
-        print("\nDistribución de Manos:")
-        print(tabulate(resultados['tabla_manos'], headers='keys', tablefmt='fancy_grid', showindex=False))
