@@ -22,4 +22,3 @@ Aleatoriedad:
 
 Independientes:
 1. huecos
-2. poker
