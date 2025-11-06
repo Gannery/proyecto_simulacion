@@ -64,7 +64,7 @@ class RandomGenerators():
     
     def constant_multiplier(self, semilla_1: int, semilla_2: int, cantidad_numeros: int) -> List:
         """
-        Genera una lista de números pseudoaleatorios usando el método de productos medios.
+        Genera una lista de números pseudoaleatorios usando el método de multiplicador constante.
         
         Args:
             semilla_1 (int): Primera semilla con cantidad par de dígitos

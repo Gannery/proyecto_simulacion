@@ -21,7 +21,7 @@ class MenuPrincipal:
         self.metodo_usado = None
         self.semilla_actual = None
         
-    def mostrar_menu_principal(self):
+    def show_main_menu(self):
         """Muestra el menú principal del programa"""
         clear_screen()
         print("=" * 60)
@@ -36,7 +36,7 @@ class MenuPrincipal:
         print("6. Salir")
         print("=" * 60)
         
-    def ejecutar_cuadrados_medios(self):
+    def execute_mean_squares(self):
         """Ejecuta el método de cuadrados medios"""
         print("\n--- Método de Cuadrados Medios ---")
         semilla = get_valid_seed()
@@ -53,7 +53,7 @@ class MenuPrincipal:
             parametros={"Cantidad": cantidad}
         )
         
-    def ejecutar_productos_medios(self):
+    def execute_middle_product(self):
         """Ejecuta el método de productos medios"""
         print("\n--- Método de Productos Medios ---")
         print("Se necesitan dos semillas con la misma cantidad de dígitos")
@@ -72,7 +72,7 @@ class MenuPrincipal:
             parametros={"Cantidad": cantidad}
         )
         
-    def ejecutar_multiplicador_constante(self):
+    def execute_constant_multiplier(self):
         """Ejecuta el método de multiplicador constante"""
         print("\n--- Método de Multiplicador Constante ---")
         print("Se necesitan dos semillas con la misma cantidad de dígitos")
@@ -91,7 +91,7 @@ class MenuPrincipal:
             parametros={"Cantidad": cantidad}
         )
         
-    def ejecutar_algoritmo_lineal(self):
+    def execute_linear_algorithm(self):
         """Ejecuta el algoritmo lineal congruencial"""
         print("\n--- Algoritmo Lineal Congruencial ---")
         semilla = int(input("Ingresa la semilla (X0): "))
@@ -111,7 +111,7 @@ class MenuPrincipal:
             parametros={"a": a, "c": c, "m": m, "Cantidad": cantidad}
         )
         
-    def mostrar_submenu_pruebas(self):
+    def show_test_submenu(self):
         """Muestra el submenú de pruebas"""
         while True:
             clear_screen()
@@ -139,22 +139,22 @@ class MenuPrincipal:
             opcion = input("Selecciona una opción: ")
             
             if opcion == "1":
-                self.ejecutar_chi_cuadrada()
+                self.execute_chi_square()
             elif opcion == "2":
-                self.ejecutar_kolmogorov()
+                self.execute_kolmogorov()
             elif opcion == "3":
-                self.ejecutar_corridas_arriba_abajo()
+                self.execute_up_down()
             elif opcion == "4":
-                self.ejecutar_corridas_media()
+                self.execute_up_down_average()
             elif opcion == "5":
-                self.ejecutar_huecos()
+                self.execute_gaps()
             elif opcion == "6":
                 break
             else:
                 print("Opción inválida")
                 input("Presiona Enter para continuar...")
                 
-    def ejecutar_chi_cuadrada(self):
+    def execute_chi_square(self):
         """Ejecuta la prueba Chi-Cuadrada"""
         print("\n--- Prueba Chi-Cuadrada (x²) ---")
         alpha = get_alpha()
@@ -171,7 +171,7 @@ class MenuPrincipal:
         show_test_results(resultados, "Chi-Cuadrada")
         input("\nPresiona Enter para continuar...")
         
-    def ejecutar_kolmogorov(self):
+    def execute_kolmogorov(self):
         """Ejecuta la prueba Kolmogorov-Smirnov"""
         print("\n--- Prueba Kolmogorov-Smirnov ---")
         alpha = get_alpha()
@@ -198,7 +198,7 @@ class MenuPrincipal:
         show_test_results(resultados, "Kolmogorov-Smirnov")
         input("\nPresiona Enter para continuar...")
         
-    def ejecutar_corridas_arriba_abajo(self):
+    def execute_up_down(self):
         """Ejecuta la prueba de corridas arriba y abajo"""
         print("\n--- Prueba de Corridas Arriba y Abajo ---")
         alpha = get_alpha()
@@ -215,7 +215,7 @@ class MenuPrincipal:
         show_test_results(resultados, "Corridas Arriba y Abajo")
         input("\nPresiona Enter para continuar...")
         
-    def ejecutar_corridas_media(self):
+    def execute_up_down_average(self):
         """Ejecuta la prueba de corridas arriba y abajo de la media"""
         print("\n--- Prueba de Corridas Arriba y Abajo de la Media ---")
         alpha = get_alpha()
@@ -232,7 +232,7 @@ class MenuPrincipal:
         show_test_results(resultados, "Corridas Arriba y Abajo de la Media")
         input("\nPresiona Enter para continuar...")
         
-    def ejecutar_huecos(self):
+    def execute_gaps(self):
         """Ejecuta la prueba de huecos"""
         print("\n--- Prueba de Huecos ---")
         alpha = get_alpha()
@@ -249,26 +249,26 @@ class MenuPrincipal:
         show_test_results(resultados, "Huecos")
         input("\nPresiona Enter para continuar...")
         
-    def ejecutar(self):
+    def execute(self):
         """Ejecuta el programa principal"""
         while True:
-            self.mostrar_menu_principal()
+            self.show_main_menu()
             opcion = input("Selecciona una opción: ")
             
             if opcion == "1":
-                self.ejecutar_cuadrados_medios()
+                self.execute_mean_squares()
                 input("\nPresiona Enter para continuar...")
             elif opcion == "2":
-                self.ejecutar_productos_medios()
+                self.execute_middle_product()
                 input("\nPresiona Enter para continuar...")
             elif opcion == "3":
-                self.ejecutar_multiplicador_constante()
+                self.execute_constant_multiplier()
                 input("\nPresiona Enter para continuar...")
             elif opcion == "4":
-                self.ejecutar_algoritmo_lineal()
+                self.execute_linear_algorithm()
                 input("\nPresiona Enter para continuar...")
             elif opcion == "5":
-                self.mostrar_submenu_pruebas()
+                self.show_test_submenu()
             elif opcion == "6":
                 print("\nBye.")
                 sys.exit(0)
@@ -281,12 +281,12 @@ def main():
     """Función principal del programa"""
     try:
         menu = MenuPrincipal()
-        menu.ejecutar()
+        menu.execute()
     except KeyboardInterrupt:
         print("\n\n¡Programa interrumpido por el usuario!")
         sys.exit(0)
     except Exception as e:
-        print(f"\n❌ Error inesperado: {e}")
+        print(f"\nError inesperado: {e}")
         input("Presiona Enter para salir...")
         sys.exit(1)
 
