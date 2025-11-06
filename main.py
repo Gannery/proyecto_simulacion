@@ -156,7 +156,7 @@ class MenuPrincipal:
                 
     def ejecutar_chi_cuadrada(self):
         """Ejecuta la prueba Chi-Cuadrada"""
-        print("\n--- Prueba Chi-Cuadrada (χ²) ---")
+        print("\n--- Prueba Chi-Cuadrada (x²) ---")
         alpha = get_alpha()
         
         if self.numeros_generados:
