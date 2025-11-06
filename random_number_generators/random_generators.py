@@ -1,12 +1,12 @@
 """ Módulo que contiene diferentes métodos para generar números pseudoaleatorios. """
 from typing import List
 
-class RandomGenerators:
+class RandomGenerators():
     
     def __init__(self) -> None:
         pass
 
-    def algoritmo_lineal(self, semilla: int, a: int, c: int, m: int, cantidad_numeros: int) -> List:
+    def linear_algorithm(self, semilla: int, a: int, c: int, m: int, cantidad_numeros: int) -> List:
         """
         Genera una lista de números pseudoaleatorios usando el método de algoritmo lineal.
 
@@ -30,7 +30,7 @@ class RandomGenerators:
             semilla = nueva_semilla
         return secuencia_aleatoria
     
-    def cuadrados_medios(self, semilla_inicial: int, cantidad_numeros: int) -> List:
+    def mean_squares(self, semilla_inicial: int, cantidad_numeros: int) -> List:
         """
         Genera una lista de números pseudoaleatorios usando el método de cuadrados medios.
         
@@ -62,7 +62,7 @@ class RandomGenerators:
         
         return secuencia_aleatoria
     
-    def multiplicador_constante(self, semilla_1: int, semilla_2: int, cantidad_numeros: int) -> List:
+    def constant_multiplier(self, semilla_1: int, semilla_2: int, cantidad_numeros: int) -> List:
         """
         Genera una lista de números pseudoaleatorios usando el método de productos medios.
         
@@ -95,7 +95,7 @@ class RandomGenerators:
         
         return secuencia_aleatoria
     
-    def productos_medios(self, semilla_1: int, semilla_2: int, cantidad_numeros: int) -> List:
+    def middle_product(self, semilla_1: int, semilla_2: int, cantidad_numeros: int) -> List:
         """
         Genera una lista de números pseudoaleatorios usando el método de productos medios.
         
