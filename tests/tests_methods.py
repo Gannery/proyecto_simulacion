@@ -36,9 +36,9 @@ class TestMethods():
         simbolos = []
         for i in range(1, n):
             if numeros[i] > numeros[i-1]:
-                simbolos.append('+')  # Sube
+                simbolos.append('+')  
             else:
-                simbolos.append('-')  # Baja
+                simbolos.append('-')  
         
         # Contar corridas
         Co = 1  
@@ -254,7 +254,7 @@ class TestMethods():
             "tabla_completa": tabla
         }
     
-    def chi_squared_test(self, numeros=None, n=20, alpha=0.05, intervalos=5) -> dict:
+    def chi_squared_test(self, numeros=None, n=20, alpha=0.05, intervalos=None) -> dict:
         """
         Prueba Chi-Cuadrada para uniformidad
         
@@ -262,19 +262,29 @@ class TestMethods():
             numeros: Lista de números a probar (opcional)
             n: int - Cantidad de números a generar si numeros es None
             alpha: float - Nivel de significancia
-            intervalos: int - Número de intervalos (default: 5)
+            intervalos: int - Número de intervalos (opcional).
             
         Returns:
             dict: con todos los resultados de la prueba
         """
-        
         if numeros is None:
             numeros = np.random.uniform(0, 1, n)
         else:
             numeros = np.array(numeros)
             n = len(numeros)
         
-        fe = n / intervalos
+        if intervalos is None:
+            # Usar la regla de la raíz cuadrada del tamaño de muestra
+            intervalos = max(5, int(np.ceil(np.sqrt(n))))
+        elif intervalos <= 0:
+            raise ValueError("El número de intervalos debe ser positivo")
+            
+        # Verificar que tenemos suficientes datos para los intervalos
+        if n < intervalos:
+            intervalos = max(5, min(n, int(np.ceil(np.sqrt(n)))))
+            print(f"Advertencia: Ajustando número de intervalos a {intervalos} debido al tamaño de muestra")
+        
+        fe = n / intervalos  # Ahora intervalos siempre será > 0 y <= n
         
         bins = np.linspace(0, 1, intervalos + 1)
         fo, _ = np.histogram(numeros, bins=bins)

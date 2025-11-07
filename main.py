@@ -10,7 +10,6 @@ from utils import (
 )
 from tabulate import tabulate
 import sys
-
 from utils.utils import get_n_kolgomorov
 
 class MenuPrincipal:
